@@ -24,6 +24,7 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.youtube.YouTube;
 import com.google.api.services.youtube.model.*;
 import edu.eci.arsw.mediameet.model.Video;
+import edu.eci.arsw.mediameet.service.MediaMeetException;
 import edu.eci.arsw.mediameet.service.externalservices.youtube.YoutubeService;
 import org.springframework.stereotype.Service;
 

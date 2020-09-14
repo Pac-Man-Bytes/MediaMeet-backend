@@ -2,7 +2,7 @@ package edu.eci.arsw.mediameet.controllers;
 
 import edu.eci.arsw.mediameet.model.Media;
 import edu.eci.arsw.mediameet.service.externalservices.youtube.YoutubeService;
-import edu.eci.arsw.mediameet.service.externalservices.youtube.impl.MediaMeetException;
+import edu.eci.arsw.mediameet.service.MediaMeetException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
