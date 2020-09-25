@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/media")
 public class MediaController {
     @Autowired
     YoutubeService youtubeService;
-    @GetMapping("/mediayoutube/{query}")
+    @GetMapping("/youtube/{query}")
     public ResponseEntity<?> getVideo (@PathVariable String query) {
         Media video = null;
         Map<String,Object> response = new HashMap<>();
