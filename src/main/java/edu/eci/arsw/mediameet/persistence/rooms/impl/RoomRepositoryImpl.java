@@ -1,7 +1,7 @@
-package edu.eci.arsw.persistence.rooms.impl;
+package edu.eci.arsw.mediameet.persistence.rooms.impl;
 
 import edu.eci.arsw.mediameet.model.Room;
-import edu.eci.arsw.persistence.rooms.RoomRepository;
+import edu.eci.arsw.mediameet.persistence.rooms.RoomRepository;
 
 public class RoomRepositoryImpl implements RoomRepository {
 

@@ -17,6 +17,7 @@ public class Room implements Serializable {
     @NotNull
     private String name;
 
+    private List<Profile> members;
     private List<Media> playlist;
     private List<Message> chat;
     private List<Role> roles;
@@ -70,5 +71,13 @@ public class Room implements Serializable {
 
     public void setPermissions(List<Permission> permissions) {
         this.permissions = permissions;
+    }
+
+    public List<Profile> getMembers() {
+        return members;
+    }
+
+    public void setMembers(List<Profile> members) {
+        this.members = members;
     }
 }
