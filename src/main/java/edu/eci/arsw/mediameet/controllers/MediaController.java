@@ -20,7 +20,7 @@ public class MediaController {
     @Autowired
     YoutubeService youtubeService;
 
-//    @GetMapping("/youtube")
+    //    @GetMapping("/youtube")
 //    public ResponseEntity<?> getVideo(@RequestBody Query query) {
 //        System.out.println(query.getQuery());
 //        Media video = null;
@@ -35,14 +35,16 @@ public class MediaController {
 //        return new ResponseEntity<Media>(video, HttpStatus.OK);
 //
 //    }
-    @GetMapping("/youtube/{query}")
-   public ResponseEntity<?> getVideo(@PathVariable String query) throws UnsupportedEncodingException {
-        System.out.println(java.net.URLDecoder.decode(query, StandardCharsets.UTF_8.name()));
-        String uri = java.net.URLDecoder.decode(query, StandardCharsets.UTF_8.name());
+    @GetMapping("/youtube")
+    public ResponseEntity<?> getVideo(@RequestParam String query) throws UnsupportedEncodingException {
+//        System.out.println("----------------");
+//        System.out.println(query);
+//        System.out.println("----------------");
+//        String uri = "";
         Media video = null;
         Map<String, Object> response = new HashMap<>();
         try {
-            video = youtubeService.getVideo(uri);
+            video = youtubeService.getVideo(query);
             System.out.println(video);
         } catch (MediaMeetException e) {
             response.put("mensaje", "No se encontraron videos");
