@@ -8,6 +8,14 @@ public abstract class Media implements Serializable {
     private String id;
     private String title;
     private String image;
+    private long time;
+
+    public Media(String id, String title, String image, long time) {
+        this.id = id;
+        this.title = title;
+        this.image = image;
+        this.time = time;
+    }
 
     public String getId() {
         return id;
@@ -33,12 +41,21 @@ public abstract class Media implements Serializable {
         this.image = image;
     }
 
+    public long getTime() {
+        return time;
+    }
+
+    public void setTime(long time) {
+        this.time = time;
+    }
+
     @Override
     public String toString() {
         return "Media{" +
                 "id='" + id + '\'' +
                 ", title='" + title + '\'' +
                 ", image='" + image + '\'' +
+                ", time=" + time +
                 '}';
     }
 }

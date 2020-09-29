@@ -26,6 +26,7 @@ public class MediaController {
         Map<String, Object> response = new HashMap<>();
         try {
             video = youtubeService.getVideo(query);
+            video.setTime(0);
         } catch (MediaMeetException e) {
             response.put("mensaje", "No se encontraron videos");
             return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);

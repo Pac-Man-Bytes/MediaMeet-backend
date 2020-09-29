@@ -48,7 +48,7 @@ public class YoutubeServiceImpl implements YoutubeService {
     private YouTube youtube;
     @Override
     public Video getVideo(String searchQuery) throws MediaMeetException {
-        edu.eci.arsw.mediameet.model.Video video = new edu.eci.arsw.mediameet.model.Video();
+        edu.eci.arsw.mediameet.model.Video video = new edu.eci.arsw.mediameet.model.Video("","","",0);
         List<SearchResult> searchResults = searchVideo(searchQuery,1);
         if(searchResults.isEmpty()){
             throw new MediaMeetException(MediaMeetException.NOT_VIDEOS_FOUND);
@@ -59,6 +59,7 @@ public class YoutubeServiceImpl implements YoutubeService {
         video.setId(singleVideo.getId().getVideoId());
         video.setTitle(singleVideo.getSnippet().getTitle());
         video.setImage(thumbnail.getUrl());
+        video.setTime(0);
         return video;
     }
 
