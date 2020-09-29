@@ -11,13 +11,14 @@ public class Room implements Serializable {
     private static final long serialVersionUID = -7788619177798333712L;
 
     @Id
-    @NotNull
-    private int id;
+    private String id;
 
     @NotNull
     private String name;
 
+
     private List<Profile> members;
+
     private List<Media> playlist;
     private List<Message> chat;
     private List<Role> roles;
@@ -25,11 +26,11 @@ public class Room implements Serializable {
 
     public Room(){}
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

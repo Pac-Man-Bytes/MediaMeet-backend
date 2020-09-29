@@ -5,5 +5,5 @@ import edu.eci.arsw.mediameet.model.Room;
 
 public interface RoomServices {
 
-    public void createRoom( Room r);
+    public Room save( Room r);
 }
