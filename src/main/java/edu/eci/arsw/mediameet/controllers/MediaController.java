@@ -1,7 +1,6 @@
 package edu.eci.arsw.mediameet.controllers;
 
 import edu.eci.arsw.mediameet.model.Media;
-import edu.eci.arsw.mediameet.model.Query;
 import edu.eci.arsw.mediameet.service.externalservices.youtube.YoutubeService;
 import edu.eci.arsw.mediameet.service.MediaMeetException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
 import java.util.*;
 
-@CrossOrigin(origins = {"http://localhost:4200"})
+@CrossOrigin(origins = {"http://localhost:4200","https://media-meet.firebaseapp.com"})
 @RestController
 @RequestMapping("/api/media")
 public class MediaController {
