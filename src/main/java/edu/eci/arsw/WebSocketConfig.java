@@ -12,7 +12,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/sync-websocket")
-                .setAllowedOrigins("http://localhost:4200","https://media-meet.firebaseapp.com")
+                .setAllowedOrigins("http://localhost:4200","https://media-meet.web.app")
                 .withSockJS();
     }
     @Override
