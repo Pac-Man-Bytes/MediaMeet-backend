@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = {"http://localhost:4200","https://media-meet.web.app"})
+@CrossOrigin(origins = {"https://localhost:4200","https://media-meet.web.app"})
 @RestController
 @RequestMapping("/api/rooms")
 public class RoomController {
