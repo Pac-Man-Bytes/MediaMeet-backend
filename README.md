@@ -45,6 +45,7 @@ mvn spring-boot:run
 * Java 8
 * Git - Version-control system
 * [Maven](https://maven.apache.org) - Dependency Management
+* MongoDB
 ## Javadoc
 
 
