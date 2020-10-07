@@ -1,5 +1,9 @@
 # MediaMeet-backend
 
+## Logo
+
+![](https://cdn.discordapp.com/attachments/748398289514397717/763456425099132978/Screen_Shot_2020-10-07_at_12.41.11_PM.png)
+
 
 ## Architecture
 
