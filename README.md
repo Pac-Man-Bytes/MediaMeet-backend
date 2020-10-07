@@ -71,6 +71,9 @@ For the continous integration, the project has CI with Circle Ci
 For the continous deployment, the project has CD with Heroku
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://mediameet-backend.herokuapp.com)
 
+For the code quality
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/5b3828c51c27438a87988630ad2bbe96)](https://www.codacy.com/gh/Pac-Man-Bytes/MediaMeet-backend/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Pac-Man-Bytes/MediaMeet-backend&amp;utm_campaign=Badge_Grade)
+
 ## Versioning
 
 We use GitFlow for versioning. For the versions available, see the [tags on this repository](https://github.com/Pac-Man-Bytes/MediaMeet-backend/releases/)
