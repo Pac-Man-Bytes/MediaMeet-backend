@@ -1,0 +1,9 @@
+version: '3'
+services:
+  backend:
+    build:
+      dockerfile: Dockerfile
+    image: mediameet/backend:latest
+    container_name: MediaMeetBackend
+    ports:
+      - "8080:6000"
