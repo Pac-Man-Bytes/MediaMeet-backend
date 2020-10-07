@@ -1,6 +1,13 @@
 # MediaMeet-backend
 
 
+## Architecture
+
++ Component Diagram
+![](https://cdn.discordapp.com/attachments/749330138407370856/763404991800410152/unknown.png)
+
+
+
 ## Getting Started
 The following steps are required in order to get a copy of the project, be able to run it and perform tests.
 ### Prerequisites
