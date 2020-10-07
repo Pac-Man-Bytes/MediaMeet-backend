@@ -1,5 +1,6 @@
 # MediaMeet-backend
 
+
 ## Getting Started
 The following steps are required in order to get a copy of the project, be able to run it and perform tests.
 ### Prerequisites
@@ -48,15 +49,24 @@ mvn site
 mvn site:run
 ```
 
+## CI/CD Badges
+
+For the continous integration, the project has CI with Circle Ci
+ [![CircleCI](https://circleci.com/gh/circleci/circleci-docs.svg?style=svg)](https://app.circleci.com/pipelines/github/Pac-Man-Bytes/MediaMeet-backend?branch=develop)
+
+For the continous deployment, the project has CD with Heroku
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://mediameet-backend.herokuapp.com)
 
 ## Versioning
 
-We use GitFlow for versioning. For the versions available, see the [tags on this repository](https://github.com/srubianof/AREP-LAB-1/releases).
+We use GitFlow for versioning. For the versions available, see the [tags on this repository](https://github.com/Pac-Man-Bytes/MediaMeet-backend/releases/)
 
 ## Author
 
 [**Santiago Rubiano Fierro**](https://github.com/srubianof) Software Engineering Student
+
 [**Alejandro Bohorquez Alzate**](https://github.com/alejandrobohal) Software Engineering Student
+
 [**Davor Cortez Cardozo**](https://github.com/d4v0r) Software Engineering Student
 
 ## License
