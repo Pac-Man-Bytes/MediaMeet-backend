@@ -6,6 +6,9 @@
 + Component Diagram
 ![](https://cdn.discordapp.com/attachments/749330138407370856/763404991800410152/unknown.png)
 
++ Packages Diagram
+![](https://cdn.discordapp.com/attachments/749330138407370856/763411410792218654/package.png)
+
 + Model
 ![](https://cdn.discordapp.com/attachments/749330138407370856/763405674520510475/model.png)
 
