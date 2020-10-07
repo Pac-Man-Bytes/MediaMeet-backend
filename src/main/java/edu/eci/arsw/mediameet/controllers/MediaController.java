@@ -30,7 +30,6 @@ public class MediaController {
             return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<Media>(video, HttpStatus.OK);
-
     }
 
 }

@@ -81,6 +81,11 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
+            <groupId>de.flapdoodle.embed</groupId>
+            <artifactId>de.flapdoodle.embed.mongo</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>com.konghq</groupId>
             <artifactId>unirest-java</artifactId>
             <version>3.10.00</version>
