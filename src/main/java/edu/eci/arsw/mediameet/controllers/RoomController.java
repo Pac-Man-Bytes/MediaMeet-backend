@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 
-@CrossOrigin(origins = {"https://localhost:4200","https://media-meet.web.app"})
+@CrossOrigin(origins = {"http://localhost:4200","https://media-meet.web.app"})
 @RestController
 @RequestMapping("/api/rooms")
 public class RoomController {
@@ -35,7 +35,7 @@ public class RoomController {
             return new ResponseEntity<>(room,HttpStatus.OK);
         }catch (MediaMeetException e){
             Map<String,String> result = new HashMap<>();
-            result.put("error",e.getMessage());
+            result.put("message",e.getMessage());
             return new ResponseEntity<>(result,HttpStatus.NOT_FOUND);
         }
     }
