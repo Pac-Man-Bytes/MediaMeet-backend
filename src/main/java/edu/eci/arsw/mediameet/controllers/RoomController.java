@@ -35,7 +35,8 @@ public class RoomController {
             return new ResponseEntity<>(room,HttpStatus.OK);
         }catch (MediaMeetException e){
             Map<String,String> result = new HashMap<>();
-            result.put("message",e.getMessage());
+            result.put("error",e.getMessage());
+            result.put("message","Sala no encontrada");
             return new ResponseEntity<>(result,HttpStatus.NOT_FOUND);
         }
     }
