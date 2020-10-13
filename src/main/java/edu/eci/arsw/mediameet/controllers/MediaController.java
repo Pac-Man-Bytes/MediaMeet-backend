@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import java.io.UnsupportedEncodingException;
 import java.util.*;
 
-@CrossOrigin(origins = {"http://localhost:4200","https://media-meet.web.app"})
+//@CrossOrigin(origins = {"http://localhost:4200","https://media-meet.web.app"})
+@CrossOrigin(origins = {"*"})
 @RestController
 @RequestMapping("/api/media")
 public class MediaController {
