@@ -12,9 +12,6 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 
 @Controller
 public class SinchronizationController {
-    @Autowired
-    SimpMessagingTemplate message;
-
     @MessageMapping("/state/{roomId}")
     @SendTo("/room/state/{roomId}")
     public String recibirMensaje(@DestinationVariable String roomId, String message) {
@@ -30,10 +27,10 @@ public class SinchronizationController {
     }
 
     @MessageMapping("/queue/{roomId}")
-    public void recibirMensajeDevolver(@DestinationVariable String roomId, Video currentTrack) {
+    @SendTo("/room/queue/{roomId}")
+    public Media recibirMensajeDevolver(@DestinationVariable String roomId, Video currentTrack) {
         System.out.println("Conectado yeyyyyyyy " + roomId);
-//        System.out.println(currentTrack.getTime());
-        message.convertAndSend("/room/queue" + roomId, currentTrack);
+        return currentTrack;
     }
 
 }
