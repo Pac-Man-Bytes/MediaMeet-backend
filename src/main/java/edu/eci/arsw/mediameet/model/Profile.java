@@ -9,6 +9,7 @@ public class Profile implements Serializable {
     private String id;
     private String nickname;
     private List<Profile> friends;
+    private List<Room> rooms;
 
     public Profile(){}
 
@@ -34,5 +35,13 @@ public class Profile implements Serializable {
 
     public void setFriends(List<Profile> friends) {
         this.friends = friends;
+    }
+
+    public List<Room> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(List<Room> rooms) {
+        this.rooms = rooms;
     }
 }
