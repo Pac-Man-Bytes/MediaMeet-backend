@@ -80,7 +80,6 @@ public class YoutubeServiceImpl implements YoutubeService {
             }).setApplicationName("youtube-cmdline-search-sample").build();
             YouTube.Search.List search = youtube.search().list("id,snippet");
             String apiKey = properties.getProperty("youtube.apikey");
-            System.out.println("AIUDAAAA");
             search.setKey(apiKey);
             search.setQ(query);
             search.setType("video");
