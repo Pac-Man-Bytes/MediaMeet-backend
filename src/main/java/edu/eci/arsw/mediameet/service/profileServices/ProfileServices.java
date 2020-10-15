@@ -10,4 +10,5 @@ public interface ProfileServices {
     Profile save(Profile p);
     Profile loadById(String id) throws MediaMeetException;
     List<Profile> loadProfiles();
+    void deleteProfiles();
 }

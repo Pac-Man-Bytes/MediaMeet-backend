@@ -32,4 +32,9 @@ public class ProfileServicesImpl implements ProfileServices {
     public List<Profile> loadProfiles() {
         return repository.findAll();
     }
+
+    @Override
+    public void deleteProfiles() {
+        repository.deleteAll();
+    }
 }
