@@ -12,7 +12,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.*;
 
 //@CrossOrigin(origins = {"http://localhost:4200","https://media-meet.web.app"})
-@CrossOrigin(origins = {"*"})
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/media")
 public class MediaController {
