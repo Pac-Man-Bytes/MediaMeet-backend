@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.io.IOException;
+
 @RunWith( SpringRunner.class )
 @SpringBootTest
 public class YoutubeServicesTest {
@@ -24,6 +26,8 @@ public class YoutubeServicesTest {
             Assert.assertEquals(video.getTime(),0);
         } catch (MediaMeetException e) {
             Assert.fail();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
     @Test
@@ -35,6 +39,8 @@ public class YoutubeServicesTest {
             Assert.assertEquals(video.getTime(),0);
         } catch (MediaMeetException e) {
             Assert.fail();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

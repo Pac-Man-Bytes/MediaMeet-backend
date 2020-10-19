@@ -53,7 +53,6 @@ public class SinchronizationController {
     }
     @MessageMapping("/fetch/{roomId}")
     public void fetchMedia(@DestinationVariable String roomId) throws MediaMeetException {
-        System.out.println(":D");
         Room room = roomServices.loadById(roomId);
         webSocket.convertAndSend("/room/fetch/" + roomId,room.getId());
     }
