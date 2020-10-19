@@ -45,7 +45,7 @@ public class ProfileControllerTest {
         profileServices.deleteProfiles();
     }
     @Test
-    public void shouldCreateRoom() throws Exception {
+    public void shouldSaveProfile() throws Exception {
             mvc.perform(
                     MockMvcRequestBuilders
                             .post("/api/profiles")

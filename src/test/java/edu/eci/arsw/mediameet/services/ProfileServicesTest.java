@@ -71,7 +71,6 @@ public class ProfileServicesTest {
         }catch (Exception e){
             Assert.fail();
         }
-
     }
 
 }
