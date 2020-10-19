@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RunWith( SpringRunner.class )
@@ -32,6 +33,31 @@ public class ProfileServicesTest {
         }catch (MediaMeetException e){
             Assert.fail();
         }
+    }
+
+    @Test
+    public void shouldLoadProfiles(){
+        //Clean Collection
+        profileServices.deleteProfiles();
+
+        //Add Profiles
+        List<Profile> profiles =  new ArrayList<>();
+        Profile p1 = new Profile();
+        p1.setId("USUARIODEPRUEBA2");
+        Profile p2 = new Profile();
+        p2.setId("USUARIODEPRUEBA3");
+        profiles.add(p1);
+        profiles.add(p2);
+
+        profileServices.save(p1);
+        profileServices.save(p2);
+        try {
+            List<Profile> query = profileServices.loadProfiles();
+            if (query.size() == profiles.size()) Assert.assertTrue(true);
+        }catch (Exception e){
+            Assert.fail();
+        }
+
     }
 
 }
