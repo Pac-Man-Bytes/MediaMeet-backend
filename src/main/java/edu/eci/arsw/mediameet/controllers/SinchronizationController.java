@@ -1,6 +1,7 @@
 package edu.eci.arsw.mediameet.controllers;
 
 
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import edu.eci.arsw.mediameet.model.Media;
 import edu.eci.arsw.mediameet.model.Room;
 import edu.eci.arsw.mediameet.model.Video;
@@ -12,6 +13,7 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
+
 import java.util.List;
 
 
@@ -21,6 +23,7 @@ public class SinchronizationController {
     RoomServices roomServices;
     @Autowired
     private SimpMessagingTemplate webSocket;
+
     @MessageMapping("/state/{roomId}")
     @SendTo("/room/state/{roomId}")
     public String recibirMensaje(@DestinationVariable String roomId, String message) {
@@ -32,35 +35,41 @@ public class SinchronizationController {
     public Media recibirMensaje(@DestinationVariable String roomId, Video currentTrack) {
         return currentTrack;
     }
+
     @MessageMapping("/next/{roomId}")
     @SendTo("/room/next/{roomId}")
     public Media recibirMensajeDevolver(@DestinationVariable String roomId, Video currentTrack) {
         return currentTrack;
     }
+
     //Guarda
     @MessageMapping("/queue/{roomId}")
     public void receiveMedia(@DestinationVariable String roomId, Video currentTrack) throws MediaMeetException {
         Room room = roomServices.loadById(roomId);
         room.addTrack(currentTrack);
         roomServices.save(room);
-        webSocket.convertAndSend("/room/queue/"+roomId,room.getPlaylist());
+        webSocket.convertAndSend("/room/queue/" + roomId, room.getPlaylist());
     }
+
     @MessageMapping("/queue/{roomId}/playlist")
     public void getMedia(@DestinationVariable String roomId) throws MediaMeetException {
         Room room = roomServices.loadById(roomId);
-        webSocket.convertAndSend("/room/queue/" + roomId + "/playlist",room.getPlaylist());
+        webSocket.convertAndSend("/room/queue/" + roomId + "/playlist", room.getPlaylist());
     }
+
     @MessageMapping("/fetch/{roomId}")
     public void fetchMedia(@DestinationVariable String roomId) throws MediaMeetException {
         Room room = roomServices.loadById(roomId);
-        webSocket.convertAndSend("/room/fetch/" + roomId,room.getId());
+        webSocket.convertAndSend("/room/fetch/" + roomId, room.getId());
     }
+
     @MessageMapping("/currentTime/{roomId}")
     @SendTo("/room/currentTime/{roomId}")
-    public String time(@DestinationVariable String roomId, String time){
+    public String time(@DestinationVariable String roomId, String time) {
         System.out.println(time);
         return time;
     }
+
     //Obtener cola actual
     //actualiza cola actual
     @MessageMapping("/queue/{roomId}/playlists")
@@ -68,7 +77,7 @@ public class SinchronizationController {
         Room room = roomServices.loadById(roomId);
         room.setPlaylist(playlist);
         roomServices.save(room);
-        webSocket.convertAndSend("/room/queue/" + roomId + "/playlists",room.getPlaylist());
+        webSocket.convertAndSend("/room/queue/" + roomId + "/playlists", room.getPlaylist());
     }
 
 }
