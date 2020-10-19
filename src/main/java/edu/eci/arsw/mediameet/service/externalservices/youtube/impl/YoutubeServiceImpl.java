@@ -47,24 +47,43 @@ public class YoutubeServiceImpl implements YoutubeService {
     private final JsonFactory JSON_FACTORY = new JacksonFactory();
     private YouTube youtube;
     @Override
-    public Video getVideo(String searchQuery) throws MediaMeetException {
-        edu.eci.arsw.mediameet.model.Video video = new edu.eci.arsw.mediameet.model.Video("","","",0);
+    public Video getVideo(String searchQuery) throws MediaMeetException, IOException {
+        edu.eci.arsw.mediameet.model.Video video = new edu.eci.arsw.mediameet.model.Video("","","",0,"");
         List<SearchResult> searchResults = searchVideo(searchQuery,1);
         if(searchResults.isEmpty()){
             throw new MediaMeetException(MediaMeetException.NOT_VIDEOS_FOUND);
         }
-        //if (rId.getKind().equals("youtube#video"))
         SearchResult singleVideo = searchResults.get(0);
         Thumbnail thumbnail = (Thumbnail) singleVideo.getSnippet().getThumbnails().get("default");
         video.setId(singleVideo.getId().getVideoId());
         video.setTitle(singleVideo.getSnippet().getTitle());
         video.setImage(thumbnail.getUrl());
         video.setTime(0);
+        getDuration(video);
         return video;
     }
 
+    private void getDuration(Video video) throws IOException {
+        Properties properties = getProperties();
+        String apiKey = properties.getProperty("youtube.apikey");
+        YouTube youtube = new YouTube.Builder(new NetHttpTransport(), new JacksonFactory(),
+                new HttpRequestInitializer() {
+                    public void initialize(HttpRequest request) throws IOException {
+                    }
+                }).setApplicationName("video-test").build();
 
-    private List<SearchResult> searchVideo(String query,long numberOfVideos) {
+        final String videoId = video.getId();
+        YouTube.Videos.List videoRequest = youtube.videos().list("snippet,statistics,contentDetails");
+        videoRequest.setId(videoId);
+        videoRequest.setKey(apiKey);
+        VideoListResponse listResponse = videoRequest.execute();
+        List<com.google.api.services.youtube.model.Video> videoList = listResponse.getItems();
+
+        com.google.api.services.youtube.model.Video targetVideo = videoList.iterator().next();
+        video.setDuration(parseDuration(targetVideo.getContentDetails().getDuration()));
+    }
+
+    private Properties getProperties() {
         Properties properties = new Properties();
         try {
             InputStream in = YoutubeServiceImpl.class.getResourceAsStream("/" + PROPERTIES_FILENAME);
@@ -74,6 +93,12 @@ public class YoutubeServiceImpl implements YoutubeService {
                     + " : " + e.getMessage());
             System.exit(1);
         }
+        return properties;
+    }
+
+
+    private List<SearchResult> searchVideo(String query,long numberOfVideos) {
+        Properties properties = getProperties();
         try {
             youtube = new YouTube.Builder(HTTP_TRANSPORT, JSON_FACTORY, new HttpRequestInitializer() {
                 public void initialize(HttpRequest request) throws IOException {}
@@ -88,6 +113,7 @@ public class YoutubeServiceImpl implements YoutubeService {
             SearchListResponse searchResponse = search.execute();
             List<SearchResult> searchResultList = searchResponse.getItems();
             if (searchResultList != null) {
+
                 return searchResultList;
             }else{
                 throw new MediaMeetException(MediaMeetException.NOT_VIDEOS_FOUND);
@@ -101,6 +127,48 @@ public class YoutubeServiceImpl implements YoutubeService {
             t.printStackTrace();
         }return null;
     }
-
+    public String parseDuration(String duration) {
+        duration = duration.substring(2);
+        String H, M, S;
+        int indOfH = duration.indexOf("H");
+        if (indOfH > -1) {
+            H = duration.substring(0,indOfH);
+            duration = duration.substring(indOfH);
+            duration = duration.replace("H","");
+        } else {
+            H = "";
+        }
+        int indOfM = duration.indexOf("M");
+        if (indOfM > -1) {
+            M = duration.substring(0,indOfM);
+            duration = duration.substring(indOfM);
+            duration = duration.replace("M","");
+            if (H.length() > 0 && M.length() == 1) {
+                M = "0" + M;
+            }
+        } else {
+            if (H.length() > 0) {
+                M = "00";
+            } else {
+                M = "0";
+            }
+        }
+        int indOfS = duration.indexOf("S");
+        if (indOfS > -1) {
+            S = duration.substring(0,indOfS);
+            duration = duration.substring(indOfS);
+            duration = duration.replace("S","");
+            if (S.length() == 1) {
+                S = "0" + S;
+            }
+        } else {
+            S = "00";
+        }
+        if (H.length() > 0) {
+            return H + ":" +  M + ":" + S;
+        } else {
+            return M + ":" + S;
+        }
+    }
 
 }

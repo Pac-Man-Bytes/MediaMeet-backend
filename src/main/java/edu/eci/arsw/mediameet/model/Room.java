@@ -1,9 +1,12 @@
 package edu.eci.arsw.mediameet.model;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 @Document(collection = "rooms")
@@ -19,12 +22,13 @@ public class Room implements Serializable {
 
     private List<Profile> members;
 
-    private List<Media> playlist;
-    private List<Message> chat;
+    private List<Video> playlist = new LinkedList<>();
+    private List<Message> chat = new LinkedList<Message>();
     private List<Role> roles;
     private List<Permission> permissions;
 
-    public Room(){}
+    public Room() {
+    }
 
     public String getId() {
         return id;
@@ -42,11 +46,11 @@ public class Room implements Serializable {
         this.name = name;
     }
 
-    public List<Media> getPlaylist() {
+    public List<Video> getPlaylist() {
         return playlist;
     }
 
-    public void setPlaylist(List<Media> playlist) {
+    public synchronized void setPlaylist(List<Video> playlist) {
         this.playlist = playlist;
     }
 
@@ -80,5 +84,17 @@ public class Room implements Serializable {
 
     public void setMembers(List<Profile> members) {
         this.members = members;
+    }
+
+    public void addTrack(Video track) {
+        synchronized (playlist) {
+            playlist.add(track);
+        }
+    }
+
+    public void addMessage(Message message) {
+        synchronized (chat) {
+            chat.add(message);
+        }
     }
 }
