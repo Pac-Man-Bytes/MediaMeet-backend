@@ -1,7 +1,7 @@
 package edu.eci.arsw.mediameet.controllers;
 
 
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
+
 import edu.eci.arsw.mediameet.model.Media;
 import edu.eci.arsw.mediameet.model.Room;
 import edu.eci.arsw.mediameet.model.Video;
