@@ -1,5 +1,6 @@
 package edu.eci.arsw.mediameet.services;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import edu.eci.arsw.mediameet.model.Profile;
 import edu.eci.arsw.mediameet.model.Room;
 import edu.eci.arsw.mediameet.service.MediaMeetException;
@@ -21,6 +22,19 @@ public class ProfileServicesTest {
 
     @Autowired
     private ProfileServices profileServices;
+
+    @Test
+    public void shouldSaveProfile() throws MediaMeetException {
+        Profile profileTest = new Profile();
+        profileTest.setId("USUARIO_TEST");
+        profileServices.save(profileTest);
+        Profile query = profileServices.loadById(profileTest.getId());
+        if(query.getId().equals(profileTest.getId())){
+            Assert.assertTrue(true);
+        }else{
+            Assert.fail();
+        }
+    }
 
     @Test
     public void shouldSLoadProfileById(){
