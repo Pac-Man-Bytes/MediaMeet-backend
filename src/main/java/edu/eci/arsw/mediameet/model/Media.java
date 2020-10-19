@@ -3,18 +3,20 @@ package edu.eci.arsw.mediameet.model;
 import java.io.Serializable;
 
 public abstract class Media implements Serializable {
+
     private static final long serialVersionUID = -7788619177798333712L;
 
     private String id;
     private String title;
     private String image;
     private long time;
-
-    public Media(String id, String title, String image, long time) {
+    private String duration;
+    public Media(String id, String title, String image, long time, String duration) {
         this.id = id;
         this.title = title;
         this.image = image;
         this.time = time;
+        this.duration = duration;
     }
 
     public String getId() {
@@ -32,6 +34,10 @@ public abstract class Media implements Serializable {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public void setDuration(String duration) {this.duration = duration;}
+
+    public String getDuration(){ return duration;}
 
     public String getImage() {
         return image;
@@ -56,6 +62,7 @@ public abstract class Media implements Serializable {
                 ", title='" + title + '\'' +
                 ", image='" + image + '\'' +
                 ", time=" + time +
+                ", length=" + duration +
                 '}';
     }
 }
