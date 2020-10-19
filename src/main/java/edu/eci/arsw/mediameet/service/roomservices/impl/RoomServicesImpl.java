@@ -56,7 +56,7 @@ public class RoomServicesImpl implements RoomServices {
         try {
             room = this.loadById(roomId);
         } catch (MediaMeetException e) {
-            e.printStackTrace();
+            e.getMessage();
         }
         return room.getChat();
     }

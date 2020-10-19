@@ -5,6 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class Room implements Serializable {
     private List<Profile> members;
 
     private List<Video> playlist = new LinkedList<>();
-    private List<Message> chat;
+    private List<Message> chat = new LinkedList<Message>();
     private List<Role> roles;
     private List<Permission> permissions;
 

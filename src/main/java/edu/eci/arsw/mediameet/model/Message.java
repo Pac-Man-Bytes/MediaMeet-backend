@@ -12,8 +12,25 @@ public class Message implements Serializable {
     private String text;
     private Long date;
     private String username;
+    private String type;
+    private String color;
     private static final long serialVersionUID = -7788619177798333712L;
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
 
     public String getText() {
         return text;
