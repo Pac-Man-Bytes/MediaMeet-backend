@@ -1,4 +1,5 @@
 package edu.eci.arsw.mediameet.model;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -25,7 +26,8 @@ public class Room implements Serializable {
     private List<Role> roles;
     private List<Permission> permissions;
 
-    public Room(){}
+    public Room() {
+    }
 
     public String getId() {
         return id;
@@ -83,9 +85,15 @@ public class Room implements Serializable {
         this.members = members;
     }
 
-    public void addTrack(Video track){
-        synchronized (playlist){
+    public void addTrack(Video track) {
+        synchronized (playlist) {
             playlist.add(track);
+        }
+    }
+
+    public void addMessage(Message message) {
+        synchronized (chat) {
+            chat.add(message);
         }
     }
 }
