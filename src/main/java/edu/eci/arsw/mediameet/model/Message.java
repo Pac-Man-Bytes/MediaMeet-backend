@@ -10,7 +10,7 @@ public class Message implements Serializable {
     @Id
     private String id;
     private String text;
-    private Long date;
+    private String date;
     private String username;
     private String type;
     private String color;
@@ -40,11 +40,11 @@ public class Message implements Serializable {
         this.text = text;
     }
 
-    public Long getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Long date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
