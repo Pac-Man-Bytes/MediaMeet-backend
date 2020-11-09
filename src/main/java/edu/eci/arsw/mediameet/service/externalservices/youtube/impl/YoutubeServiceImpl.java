@@ -64,7 +64,7 @@ public class YoutubeServiceImpl implements YoutubeService {
         Thumbnail thumbnail = (Thumbnail) singleVideo.getSnippet().getThumbnails().get("default");
         video.setId(singleVideo.getId().getVideoId());
         video.setTitle(singleVideo.getSnippet().getTitle());
-        video.setTitle(video.getTitle().replaceAll("&quot", ""));
+        video.setTitle(video.getTitle().replaceAll("&quot;", "\""));
         video.setImage(thumbnail.getUrl());
         video.setTime(0);
         getDuration(video);
