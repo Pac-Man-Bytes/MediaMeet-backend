@@ -1,5 +1,6 @@
 package edu.eci.arsw.mediameet.controllers;
 
+import edu.eci.arsw.mediameet.model.Profile;
 import edu.eci.arsw.mediameet.model.Room;
 import edu.eci.arsw.mediameet.service.MediaMeetException;
 import edu.eci.arsw.mediameet.service.roomservices.RoomServices;
@@ -42,6 +43,13 @@ public class RoomController {
         }
     }
 
-
-
+    @PatchMapping("room/{id}")
+    public ResponseEntity addNewRoomMember(@PathVariable String id, @RequestBody Profile profile){
+        try{
+            services.addNewRoomMember(id, profile);
+            return  new ResponseEntity(HttpStatus.OK);
+        }catch (MediaMeetException e){
+            return new ResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
