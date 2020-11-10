@@ -39,24 +39,32 @@ import java.util.*;
  */
 @Service
 public class YoutubeServiceImpl implements YoutubeService {
-    /** Global instance properties filename. */
+    /**
+     * Global instance properties filename.
+     */
     private String PROPERTIES_FILENAME = "youtube.properties";
-    /** Global instance of the HTTP transport. */
+    /**
+     * Global instance of the HTTP transport.
+     */
     private final HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
-    /** Global instance of the JSON factory. */
+    /**
+     * Global instance of the JSON factory.
+     */
     private final JsonFactory JSON_FACTORY = new JacksonFactory();
     private YouTube youtube;
+
     @Override
     public Video getVideo(String searchQuery) throws MediaMeetException, IOException {
-        edu.eci.arsw.mediameet.model.Video video = new edu.eci.arsw.mediameet.model.Video("","","",0,"");
-        List<SearchResult> searchResults = searchVideo(searchQuery,1);
-        if(searchResults.isEmpty()){
+        edu.eci.arsw.mediameet.model.Video video = new edu.eci.arsw.mediameet.model.Video("", "", "", 0, "");
+        List<SearchResult> searchResults = searchVideo(searchQuery, 1);
+        if (searchResults.isEmpty()) {
             throw new MediaMeetException(MediaMeetException.NOT_VIDEOS_FOUND);
         }
         SearchResult singleVideo = searchResults.get(0);
         Thumbnail thumbnail = (Thumbnail) singleVideo.getSnippet().getThumbnails().get("default");
         video.setId(singleVideo.getId().getVideoId());
         video.setTitle(singleVideo.getSnippet().getTitle());
+        video.setTitle(video.getTitle().replaceAll("&quot;", "\""));
         video.setImage(thumbnail.getUrl());
         video.setTime(0);
         getDuration(video);
@@ -97,11 +105,12 @@ public class YoutubeServiceImpl implements YoutubeService {
     }
 
 
-    private List<SearchResult> searchVideo(String query,long numberOfVideos) {
+    private List<SearchResult> searchVideo(String query, long numberOfVideos) {
         Properties properties = getProperties();
         try {
             youtube = new YouTube.Builder(HTTP_TRANSPORT, JSON_FACTORY, new HttpRequestInitializer() {
-                public void initialize(HttpRequest request) throws IOException {}
+                public void initialize(HttpRequest request) throws IOException {
+                }
             }).setApplicationName("youtube-cmdline-search-sample").build();
             YouTube.Search.List search = youtube.search().list("id,snippet");
             String apiKey = properties.getProperty("youtube.apikey");
@@ -115,7 +124,7 @@ public class YoutubeServiceImpl implements YoutubeService {
             if (searchResultList != null) {
 
                 return searchResultList;
-            }else{
+            } else {
                 throw new MediaMeetException(MediaMeetException.NOT_VIDEOS_FOUND);
             }
         } catch (GoogleJsonResponseException e) {
@@ -125,24 +134,26 @@ public class YoutubeServiceImpl implements YoutubeService {
             System.err.println("There was an IO error: " + e.getCause() + " : " + e.getMessage());
         } catch (Throwable t) {
             t.printStackTrace();
-        }return null;
+        }
+        return null;
     }
+
     public String parseDuration(String duration) {
         duration = duration.substring(2);
         String H, M, S;
         int indOfH = duration.indexOf("H");
         if (indOfH > -1) {
-            H = duration.substring(0,indOfH);
+            H = duration.substring(0, indOfH);
             duration = duration.substring(indOfH);
-            duration = duration.replace("H","");
+            duration = duration.replace("H", "");
         } else {
             H = "";
         }
         int indOfM = duration.indexOf("M");
         if (indOfM > -1) {
-            M = duration.substring(0,indOfM);
+            M = duration.substring(0, indOfM);
             duration = duration.substring(indOfM);
-            duration = duration.replace("M","");
+            duration = duration.replace("M", "");
             if (H.length() > 0 && M.length() == 1) {
                 M = "0" + M;
             }
@@ -155,9 +166,9 @@ public class YoutubeServiceImpl implements YoutubeService {
         }
         int indOfS = duration.indexOf("S");
         if (indOfS > -1) {
-            S = duration.substring(0,indOfS);
+            S = duration.substring(0, indOfS);
             duration = duration.substring(indOfS);
-            duration = duration.replace("S","");
+            duration = duration.replace("S", "");
             if (S.length() == 1) {
                 S = "0" + S;
             }
@@ -165,7 +176,7 @@ public class YoutubeServiceImpl implements YoutubeService {
             S = "00";
         }
         if (H.length() > 0) {
-            return H + ":" +  M + ":" + S;
+            return H + ":" + M + ":" + S;
         } else {
             return M + ":" + S;
         }
