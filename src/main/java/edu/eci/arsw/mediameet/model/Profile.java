@@ -3,6 +3,7 @@ package edu.eci.arsw.mediameet.model;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Document(collection = "profiles")
@@ -12,8 +13,8 @@ public class Profile implements Serializable {
     private String id;
     private String nickname;
     private String photo;
-    private List<Profile> friends;
-    private List<Room> rooms;
+    private List<Profile> friends = new ArrayList<>();;
+    private List<Room> rooms = new ArrayList<>();
 
     public Profile(){}
 

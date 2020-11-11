@@ -66,9 +66,9 @@ public class RoomServicesImpl implements RoomServices {
 
     @Override
     public void addNewRoomMember(String id, Profile profile) throws MediaMeetException {
-
         Room room = loadById(id);
         List<Profile> profiles = room.getMembers();
+        System.out.println(profiles.toString());
         if(profiles.stream().anyMatch(p -> p.getId().equals(profile.getId()))) throw new MediaMeetException(MediaMeetException.THAT_MEMBER_ALREADY_EXISTS);
         profiles.add(profile);
         room.setMembers(profiles);

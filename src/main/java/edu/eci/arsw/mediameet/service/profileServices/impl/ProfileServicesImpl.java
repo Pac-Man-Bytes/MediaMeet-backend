@@ -45,7 +45,7 @@ public class ProfileServicesImpl implements ProfileServices {
         List<Room> rooms = profile.getRooms();
         rooms.add(room);
         profile.setRooms(rooms);
-        save(profile);
+        repository.save(profile);
     }
 
     @Override

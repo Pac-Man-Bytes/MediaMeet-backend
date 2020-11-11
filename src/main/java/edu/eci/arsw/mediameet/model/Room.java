@@ -20,7 +20,7 @@ public class Room implements Serializable {
     private String name;
 
 
-    private List<Profile> members;
+    private List<Profile> members = new ArrayList<>();
 
     private List<Video> playlist = new LinkedList<>();
     private List<Message> chat = new LinkedList<Message>();
