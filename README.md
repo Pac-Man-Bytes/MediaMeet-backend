@@ -70,6 +70,7 @@ mvn site:run
 ## CI/CD Badges
 
 For the continous integration, the project has CI with Circle Ci
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/07e845c199424cedaf6b42539913bbd3)](https://app.codacy.com/gh/Pac-Man-Bytes/MediaMeet-backend?utm_source=github.com&utm_medium=referral&utm_content=Pac-Man-Bytes/MediaMeet-backend&utm_campaign=Badge_Grade)
  [![CircleCI](https://circleci.com/gh/circleci/circleci-docs.svg?style=svg)](https://app.circleci.com/pipelines/github/Pac-Man-Bytes/MediaMeet-backend?branch=develop)
 
 For the continous deployment, the project has CD with Heroku
