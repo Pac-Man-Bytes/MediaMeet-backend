@@ -8,6 +8,7 @@ public class Profile implements Serializable {
 
     private String id;
     private String nickname;
+    private String photo;
     private List<Profile> friends;
     private List<Room> rooms;
 
@@ -43,5 +44,13 @@ public class Profile implements Serializable {
 
     public void setRooms(List<Room> rooms) {
         this.rooms = rooms;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 }

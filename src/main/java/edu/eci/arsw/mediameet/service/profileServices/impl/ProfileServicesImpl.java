@@ -20,7 +20,11 @@ public class ProfileServicesImpl implements ProfileServices {
 
     @Override
     public Profile save(Profile p) {
-        return repository.save(p);
+        if(repository.existsById(p.getId())){
+            return p;
+        }else{
+            return repository.save(p);
+        }
     }
 
     @Override

@@ -23,6 +23,7 @@ public class ProfileController {
     @PostMapping()
     public ResponseEntity<?> createProfile(@RequestBody Profile profile){
         try{
+            System.out.println(profile.getPhoto());
             return new ResponseEntity<>(services.save(profile), HttpStatus.CREATED);
         } catch (Exception e){
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
