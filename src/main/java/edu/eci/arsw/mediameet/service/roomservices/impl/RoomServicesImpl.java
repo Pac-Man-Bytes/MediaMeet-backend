@@ -1,6 +1,7 @@
 package edu.eci.arsw.mediameet.service.roomservices.impl;
 
 import edu.eci.arsw.mediameet.model.Message;
+import edu.eci.arsw.mediameet.model.Profile;
 import edu.eci.arsw.mediameet.model.Room;
 import edu.eci.arsw.mediameet.persistence.rooms.RoomRepository;
 import edu.eci.arsw.mediameet.service.MediaMeetException;
@@ -61,5 +62,17 @@ public class RoomServicesImpl implements RoomServices {
             e.getMessage();
         }
         return room.getChat();
+    }
+
+    @Override
+    public void addNewRoomMember(String id, Profile profile) throws MediaMeetException {
+        Room room = loadById(id);
+        List<Profile> profiles = room.getMembers();
+        System.out.println(profiles.toString());
+        if(profiles.stream().anyMatch(p -> p.getId().equals(profile.getId()))) throw new MediaMeetException(MediaMeetException.THAT_MEMBER_ALREADY_EXISTS);
+        profiles.add(profile);
+        room.setMembers(profiles);
+        save(room);
+
     }
 }

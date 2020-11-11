@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Controller
 public class ChatController {
@@ -35,6 +37,7 @@ public class ChatController {
                 e.printStackTrace();
             }
         }
+        System.out.println(message.getProfile().getPhoto());
         return message;
     }
 

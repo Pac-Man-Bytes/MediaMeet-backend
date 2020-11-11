@@ -1,6 +1,5 @@
 package edu.eci.arsw.mediameet.controllers;
 
-
 import edu.eci.arsw.mediameet.model.Profile;
 import edu.eci.arsw.mediameet.model.Room;
 import edu.eci.arsw.mediameet.service.MediaMeetException;
@@ -45,6 +44,16 @@ public class ProfileController {
             result.put("error",e.getMessage());
             result.put("message","Perfil no encontrado");
             return new ResponseEntity<>(result,HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PatchMapping("profile/{id}")
+    public ResponseEntity<?> updateProfileRooms(@PathVariable String id, @RequestBody Room room ){
+        try{
+            services.addNewRoom(id, room);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }catch (MediaMeetException e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

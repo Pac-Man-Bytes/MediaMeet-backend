@@ -14,6 +14,7 @@ public class Message implements Serializable {
     private String username;
     private String type;
     private String color;
+    private Profile profile;
     private static final long serialVersionUID = -7788619177798333712L;
 
     public String getType() {
@@ -62,5 +63,13 @@ public class Message implements Serializable {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
     }
 }

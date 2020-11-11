@@ -1,7 +1,6 @@
 package edu.eci.arsw.mediameet.controllers;
 
 
-
 import edu.eci.arsw.mediameet.model.Media;
 import edu.eci.arsw.mediameet.model.Room;
 import edu.eci.arsw.mediameet.model.Video;
@@ -15,7 +14,6 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
-
 
 @Controller
 public class SinchronizationController {
@@ -65,9 +63,8 @@ public class SinchronizationController {
 
     @MessageMapping("/currentTime/{roomId}")
     @SendTo("/room/currentTime/{roomId}")
-    public String time(@DestinationVariable String roomId, String time) {
-        System.out.println(time);
-        return time;
+    public Video time(@DestinationVariable String roomId, Video currentTrack) {
+        return currentTrack;
     }
 
     //Obtener cola actual
@@ -79,5 +76,4 @@ public class SinchronizationController {
         roomServices.save(room);
         webSocket.convertAndSend("/room/queue/" + roomId + "/playlists", room.getPlaylist());
     }
-
 }

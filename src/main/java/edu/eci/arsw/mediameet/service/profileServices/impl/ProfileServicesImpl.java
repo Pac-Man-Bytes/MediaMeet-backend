@@ -1,6 +1,7 @@
 package edu.eci.arsw.mediameet.service.profileServices.impl;
 
 import edu.eci.arsw.mediameet.model.Profile;
+import edu.eci.arsw.mediameet.model.Room;
 import edu.eci.arsw.mediameet.persistence.rooms.ProfileRepository;
 import edu.eci.arsw.mediameet.service.MediaMeetException;
 import edu.eci.arsw.mediameet.service.profileServices.ProfileServices;
@@ -19,7 +20,11 @@ public class ProfileServicesImpl implements ProfileServices {
 
     @Override
     public Profile save(Profile p) {
-        return repository.save(p);
+        if(repository.existsById(p.getId())){
+            return p;
+        }else{
+            return repository.save(p);
+        }
     }
 
     @Override
@@ -31,6 +36,16 @@ public class ProfileServicesImpl implements ProfileServices {
     @Override
     public List<Profile> loadProfiles() {
         return repository.findAll();
+    }
+
+    @Override
+    public void addNewRoom(String id, Room room) throws MediaMeetException {
+        Profile profile = loadById(id);
+        if(profile.getRooms().stream().anyMatch(r -> r.getId().equals(room.getId()))) throw new MediaMeetException(MediaMeetException.REPEAT_ROOM);
+        List<Room> rooms = profile.getRooms();
+        rooms.add(room);
+        profile.setRooms(rooms);
+        repository.save(profile);
     }
 
     @Override
