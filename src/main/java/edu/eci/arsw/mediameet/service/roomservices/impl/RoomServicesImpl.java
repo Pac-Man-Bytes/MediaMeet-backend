@@ -69,7 +69,7 @@ public class RoomServicesImpl implements RoomServices {
 
         Room room = loadById(id);
         List<Profile> profiles = room.getMembers();
-        if(profiles.stream().anyMatch(p -> p.getId().equals(profile.getId()))) throw new MediaMeetException(MediaMeetException.THAT_MEMBER_ALREADY_EXISTS)
+        if(profiles.stream().anyMatch(p -> p.getId().equals(profile.getId()))) throw new MediaMeetException(MediaMeetException.THAT_MEMBER_ALREADY_EXISTS);
         profiles.add(profile);
         room.setMembers(profiles);
         save(room);
