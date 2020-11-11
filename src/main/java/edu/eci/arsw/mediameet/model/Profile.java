@@ -1,8 +1,11 @@
 package edu.eci.arsw.mediameet.model;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.io.Serializable;
 import java.util.List;
 
+@Document(collection = "profiles")
 public class Profile implements Serializable {
     private static final long serialVersionUID = -7788619177798333712L;
 
