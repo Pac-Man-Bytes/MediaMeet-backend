@@ -1,0 +1,6 @@
+projectKey=edu.eci.arsw.mediameet:mediameet
+serverUrl=http://104.214.56.30
+serverVersion=7.9.1.27448
+dashboardUrl=http://104.214.56.30/dashboard?id=edu.eci.arsw.mediameet%3Amediameet
+ceTaskId=AXX81Dwfz0w6qUkmTF0C
+ceTaskUrl=http://104.214.56.30/api/ce/task?id=AXX81Dwfz0w6qUkmTF0C
