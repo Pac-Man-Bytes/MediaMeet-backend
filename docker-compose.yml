@@ -1,25 +1,11 @@
 version: '3'
 
-volumes:
-  redis: { }
-
 services:
   backend:
     build:
       context: .
       dockerfile: Dockerfile
     image: srubianof/backend:latest
-    environment:
-      - REDIS_HOST=172.17.0.1
-    depends_on:
-      - redis
     container_name: MediaMeetBackend
     ports:
-      - "8081:8080"
-  redis:
-    image: redis:5.0.10-alpine@sha256:b38e34d20bfedc5a4331c97373e3508e8a7a855008ef9ba78d25887da36ce088
-    restart: unless-stopped
-    ports:
-      - "6379:6379"
-    volumes:
-      - "redis:/data"
+      - "8080:8080"
