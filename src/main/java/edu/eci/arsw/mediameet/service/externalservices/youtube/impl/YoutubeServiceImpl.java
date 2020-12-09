@@ -62,32 +62,36 @@ public class YoutubeServiceImpl implements YoutubeService {
 
     @Override
     public Video getVideo(String searchQuery) throws MediaMeetException, IOException {
-        edu.eci.arsw.mediameet.model.Video video = new edu.eci.arsw.mediameet.model.Video("", "", "", 0, "");
-        List<SearchResult> searchResults = searchVideo(searchQuery, 5);
-        if (searchResults.isEmpty()) {
-            throw new MediaMeetException(MediaMeetException.NOT_VIDEOS_FOUND);//TODO motor
+        edu.eci.arsw.mediameet.model.Video video = new edu.eci.arsw.mediameet.model.Video("", "", "", 0, "", "");
+
+        if (backendCache.exists(searchQuery)) {
+            System.out.println("Gotcha bitch!");
+            return backendCache.get(searchQuery);
+        } else {
+            List<SearchResult> searchResults = searchVideo(searchQuery, 5);
+            if (searchResults.isEmpty()) {
+                throw new MediaMeetException(MediaMeetException.NOT_VIDEOS_FOUND);//TODO motor
+            }
+            searchResults.forEach(System.out::println);
+            List<edu.eci.arsw.mediameet.model.Video> mediaList = new ArrayList<>();
+            for (SearchResult searchResult : searchResults) {
+                Thumbnail thumbnail = (Thumbnail) searchResult.getSnippet().getThumbnails().get("default");
+                Video video1 = new Video(searchResult.getId().getVideoId(), searchResult.getSnippet().getTitle().replaceAll("&quot;", "\""), thumbnail.getUrl(), 0, "", searchQuery);
+                try {
+                    getDuration(video1);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                mediaList.add(video1);
+                System.out.println("HEY  HEY HEY");
+                backendCache.put(video1, searchQuery);
+                System.out.println("HEY  HEY HEY");
+
+            }
+            backendCache.getAll().forEach(System.out::println);
+            return mediaList.get(0);
         }
 
-        List<edu.eci.arsw.mediameet.model.Video> mediaList = new ArrayList<>();
-
-        for (SearchResult searchResult : searchResults) {
-            Thumbnail thumbnail = (Thumbnail) searchResult.getSnippet().getThumbnails().get("default");
-            System.out.println();
-            Video video1 = new Video(searchResult.getId().getVideoId(), searchResult.getSnippet().getTitle().replaceAll("&quot;", "\""), thumbnail.getUrl(), 0, "");
-//            video1.setTitle(video.getTitle().replaceAll("&quot;", "\""));
-            try {
-                getDuration(video1);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            mediaList.add(video1);
-            if (backendCache.exists(video1.getTitle())) {
-                return video1;
-            } else {
-                backendCache.put(video1);
-            }
-        }
-        return mediaList.get(0);
     }
 
     private void getDuration(Video video) throws IOException {

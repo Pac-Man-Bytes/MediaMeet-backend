@@ -11,12 +11,23 @@ public abstract class Media implements Serializable {
     private String image;
     private long time;
     private String duration;
-    public Media(String id, String title, String image, long time, String duration) {
+    private String query;
+
+    public Media(String id, String title, String image, long time, String duration, String query) {
         this.id = id;
         this.title = title;
         this.image = image;
         this.time = time;
         this.duration = duration;
+        this.query = query;
+    }
+
+    public String getQuery() {
+        return query;
+    }
+
+    public void setQuery(String query) {
+        this.query = query;
     }
 
     public String getId() {
@@ -35,9 +46,13 @@ public abstract class Media implements Serializable {
         this.title = title;
     }
 
-    public void setDuration(String duration) {this.duration = duration;}
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
 
-    public String getDuration(){ return duration;}
+    public String getDuration() {
+        return duration;
+    }
 
     public String getImage() {
         return image;
@@ -63,6 +78,7 @@ public abstract class Media implements Serializable {
                 ", image='" + image + '\'' +
                 ", time=" + time +
                 ", length=" + duration +
+                ", query= " + query +
                 '}';
     }
 }

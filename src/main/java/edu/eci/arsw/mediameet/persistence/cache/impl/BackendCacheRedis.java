@@ -29,13 +29,13 @@ public class BackendCacheRedis implements IBackendCache {
     }
 
     @Override
-    public boolean exists(String title) {
-        return get(title) != null;
+    public boolean exists(String query) {
+        return get(query) != null;
     }
 
     @Override
-    public Video get(String title) {
-        return (Video) hashOperations.get("MediaMeetCache", getKey(title));
+    public Video get(String query) {
+        return (Video) hashOperations.get("MediaMeetCache", getKey(query));
     }
 
     @Override
@@ -44,8 +44,8 @@ public class BackendCacheRedis implements IBackendCache {
     }
 
     @Override
-    public void put(Video video) {
-        hashOperations.put("MediaMeetCache", getKey(video.getTitle()), video);
+    public void put(Video video,String query) {
+        hashOperations.put("MediaMeetCache", getKey(query), video);
     }
 
     private String getKey(String title) {
