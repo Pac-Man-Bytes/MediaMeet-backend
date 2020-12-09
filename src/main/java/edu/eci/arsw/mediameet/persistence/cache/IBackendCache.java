@@ -13,5 +13,5 @@ public interface IBackendCache {
 
     List<Video> getAll();
 
-    void put(Video payload);
+    public void put(Video video,String query);
 }
