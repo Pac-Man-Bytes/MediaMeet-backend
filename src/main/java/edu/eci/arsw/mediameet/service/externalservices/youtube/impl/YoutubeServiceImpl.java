@@ -65,14 +65,13 @@ public class YoutubeServiceImpl implements YoutubeService {
         edu.eci.arsw.mediameet.model.Video video = new edu.eci.arsw.mediameet.model.Video("", "", "", 0, "", "");
 
         if (backendCache.exists(searchQuery)) {
-            System.out.println("Gotcha bitch!");
+            System.out.println("Gotcha!");
             return backendCache.get(searchQuery);
         } else {
             List<SearchResult> searchResults = searchVideo(searchQuery, 5);
             if (searchResults.isEmpty()) {
                 throw new MediaMeetException(MediaMeetException.NOT_VIDEOS_FOUND);//TODO motor
             }
-            searchResults.forEach(System.out::println);
             List<edu.eci.arsw.mediameet.model.Video> mediaList = new ArrayList<>();
             for (SearchResult searchResult : searchResults) {
                 Thumbnail thumbnail = (Thumbnail) searchResult.getSnippet().getThumbnails().get("default");
@@ -83,12 +82,10 @@ public class YoutubeServiceImpl implements YoutubeService {
                     e.printStackTrace();
                 }
                 mediaList.add(video1);
-                System.out.println("HEY  HEY HEY");
                 backendCache.put(video1, searchQuery);
-                System.out.println("HEY  HEY HEY");
 
             }
-            backendCache.getAll().forEach(System.out::println);
+            System.out.println("New!");
             return mediaList.get(0);
         }
 
