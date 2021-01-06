@@ -64,31 +64,28 @@ public class YoutubeServiceImpl implements YoutubeService {
     public Video getVideo(String searchQuery) throws MediaMeetException, IOException {
         edu.eci.arsw.mediameet.model.Video video = new edu.eci.arsw.mediameet.model.Video("", "", "", 0, "", "");
 
-        if (backendCache.exists(searchQuery)) {
-            System.out.println("Gotcha!");
-            return backendCache.get(searchQuery);
-        } else {
-            List<SearchResult> searchResults = searchVideo(searchQuery, 5);
-            if (searchResults.isEmpty()) {
-                throw new MediaMeetException(MediaMeetException.NOT_VIDEOS_FOUND);//TODO motor
-            }
-            List<edu.eci.arsw.mediameet.model.Video> mediaList = new ArrayList<>();
-            for (SearchResult searchResult : searchResults) {
-                Thumbnail thumbnail = (Thumbnail) searchResult.getSnippet().getThumbnails().get("default");
-                Video video1 = new Video(searchResult.getId().getVideoId(), searchResult.getSnippet().getTitle().replaceAll("&quot;", "\""), thumbnail.getUrl(), 0, "", searchQuery);
-                try {
-                    getDuration(video1);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                mediaList.add(video1);
-                backendCache.put(video1, searchQuery);
-
-            }
-            System.out.println("New!");
-            return mediaList.get(0);
+        //if (backendCache.exists(searchQuery)) {
+        //    System.out.println("Gotcha!");
+        //    return backendCache.get(searchQuery);
+        //} else {
+        List<SearchResult> searchResults = searchVideo(searchQuery, 5);
+        if (searchResults.isEmpty()) {
+            throw new MediaMeetException(MediaMeetException.NOT_VIDEOS_FOUND);//TODO motor
         }
-
+        List<edu.eci.arsw.mediameet.model.Video> mediaList = new ArrayList<>();
+        for (SearchResult searchResult : searchResults) {
+            Thumbnail thumbnail = (Thumbnail) searchResult.getSnippet().getThumbnails().get("default");
+            Video video1 = new Video(searchResult.getId().getVideoId(), searchResult.getSnippet().getTitle().replaceAll("&quot;", "\""), thumbnail.getUrl(), 0, "", searchQuery);
+            try {
+                getDuration(video1);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            mediaList.add(video1);
+            backendCache.put(video1, searchQuery);
+        }
+        return mediaList.get(0);
+        //}
     }
 
     private void getDuration(Video video) throws IOException {
