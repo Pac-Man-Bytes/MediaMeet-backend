@@ -82,7 +82,7 @@ public class YoutubeServiceImpl implements YoutubeService {
                 e.printStackTrace();
             }
             mediaList.add(video1);
-            backendCache.put(video1, searchQuery);
+            //backendCache.put(video1, searchQuery);
         }
         return mediaList.get(0);
         //}
